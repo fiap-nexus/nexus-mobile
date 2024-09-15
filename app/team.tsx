@@ -31,7 +31,7 @@ export default function TeamScreen() {
     <View className="flex-1">
       <View className="items-center justify-between h-screen mt-10 px-4">
         <View className="items-center my-8">
-          <Text className="text-3xl text-white font-bruno">Nossos Devs</Text>
+          <Text className="text-3xl text-white font-bruno uppercase">Nossos Devs</Text>
         </View>
 
         <View className="items-center space-y-4 w-full">

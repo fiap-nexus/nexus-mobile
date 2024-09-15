@@ -1,42 +1,42 @@
-import { Alert, KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
-import { router } from "expo-router";
-import { useSignUp } from "@clerk/clerk-expo";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Alert, KeyboardAvoidingView, ScrollView, Text, View } from "react-native"
+import { router } from "expo-router"
+import { useSignUp } from "@clerk/clerk-expo"
+import { Controller, useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-import { Input } from "@/components/input";
-import { Button } from "@/components/button";
+import { Input } from "@/components/input"
+import { Button } from "@/components/button"
 
 const userSchema = z.object({
   code: z.string().min(1, "Campo obrigatório"),
-});
+})
 
-type UserSchema = z.infer<typeof userSchema>;
+type UserSchema = z.infer<typeof userSchema>
 
 export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp();
+  const { isLoaded, signUp, setActive } = useSignUp()
 
   const { control, handleSubmit } = useForm<UserSchema>({
     defaultValues: {
       code: "",
     },
     resolver: zodResolver(userSchema),
-  });
+  })
 
   async function handleVerify(data: UserSchema) {
-    if (!isLoaded) return;
+    if (!isLoaded) return
 
-    const { code } = data;
+    const { code } = data
 
     try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({ code });
+      const completeSignUp = await signUp.attemptEmailAddressVerification({ code })
 
-      await setActive({ session: completeSignUp.createdSessionId });
+      await setActive({ session: completeSignUp.createdSessionId })
 
-      router.push("/congrats");
+      router.push("/congrats")
     } catch (err: any) {
-      console.error("OAuth error: ", JSON.stringify(err));
+      console.error("OAuth error: ", JSON.stringify(err))
     }
   }
 
@@ -45,7 +45,7 @@ export default function SignUpScreen() {
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1 flex-grow">
         <View className="items-center h-screen mt-10 px-4">
           <View className="items-center my-8">
-            <Text className="text-3xl text-white font-bruno">Verificação</Text>
+            <Text className="text-3xl text-white font-bruno uppercase">Verificação</Text>
           </View>
 
           <Text className="max-w-[300px] text-center text-base text-white font-regular mb-6">
@@ -76,5 +76,5 @@ export default function SignUpScreen() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-  );
+  )
 }

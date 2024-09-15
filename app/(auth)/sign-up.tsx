@@ -1,7 +1,7 @@
-import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native"
 
-import { AccountAuth } from "@/components/account-auth";
-import { SignUpForm } from "@/components/sign-up-form";
+import { AccountAuth } from "@/components/account-auth"
+import { SignUpForm } from "@/components/sign-up-form"
 
 export default function SignUpScreen() {
   return (
@@ -9,7 +9,7 @@ export default function SignUpScreen() {
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1 flex-grow">
         <View className="items-center h-screen mt-10 px-4">
           <View className="items-center my-8">
-            <Text className="text-3xl text-white font-bruno">Registro</Text>
+            <Text className="text-3xl text-white font-bruno uppercase">Registro</Text>
           </View>
 
           <AccountAuth />
@@ -24,5 +24,5 @@ export default function SignUpScreen() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-  );
+  )
 }

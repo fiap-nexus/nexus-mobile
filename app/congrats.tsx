@@ -12,7 +12,7 @@ export default function CongratsScreen() {
         <Image source={require("../assets/images/logo.png")} alt="" style={{ width: 120, height: 120, objectFit: "cover" }} />
 
         <View className="items-center space-y-4 mt-8">
-          <Text className="text-2xl text-white font-bruno">Parabéns</Text>
+          <Text className="text-2xl text-white font-bruno uppercase">Parabéns</Text>
           <Text className="text-center text-base text-white font-regular">Você entrou na lista de espera com sucesso!</Text>
         </View>
 
@@ -22,7 +22,7 @@ export default function CongratsScreen() {
         </View>
 
         <View className="items-center w-full mb-20 mt-5">
-          <Button onPress={() => router.push("/team")}>Conhecer devs</Button>
+          <Button onPress={() => router.push("/team")}>Conheça nossos devs</Button>
         </View>
       </View>
     </View>
