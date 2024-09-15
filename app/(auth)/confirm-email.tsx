@@ -64,7 +64,7 @@ export default function SignUpScreen() {
                 name={"code"}
                 render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
                   <>
-                    <Input label="Código" value={value} onChangeText={onChange} onBlur={onBlur} />
+                    <Input value={value} onChangeText={onChange} onBlur={onBlur} />
                     {error && <Text className="text-sm text-red-700 font-regular">{error.message}</Text>}
                   </>
                 )}
