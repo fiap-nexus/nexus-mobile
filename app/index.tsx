@@ -1,9 +1,9 @@
-import { Text, View } from "react-native";
-import { router } from "expo-router";
-import { Image } from "expo-image";
+import { Text, View } from "react-native"
+import { router } from "expo-router"
+import { Image } from "expo-image"
 
-import { CountdownTimer } from "@/components/countdown-timer";
-import { Button } from "@/components/button";
+import { CountdownTimer } from "@/components/countdown-timer"
+import { Button } from "@/components/button"
 
 export default function HomeScreen() {
   return (
@@ -27,5 +27,5 @@ export default function HomeScreen() {
         </View>
       </View>
     </View>
-  );
+  )
 }

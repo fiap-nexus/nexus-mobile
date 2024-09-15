@@ -1,7 +1,9 @@
-import { Button } from "@/components/Button";
-import { CountdownTimer } from "@/components/countdown-timer";
-import { Image } from "expo-image";
-import { Text, View } from "react-native";
+import { Text, View } from "react-native"
+import { router } from "expo-router"
+import { Image } from "expo-image"
+
+import { Button } from "@/components/button"
+import { CountdownTimer } from "@/components/countdown-timer"
 
 export default function CongratsScreen() {
   return (
@@ -16,12 +18,13 @@ export default function CongratsScreen() {
 
         <View className="flex-1 items-center justify-center">
           <CountdownTimer />
+          <Text className="text-center text-base text-white font-regular mt-5">Te vejo no lançamento!</Text>
         </View>
 
         <View className="items-center w-full mb-20 mt-5">
-          <Text className="text-center text-base text-white font-regular">Te vejo no lançamento!</Text>
+          <Button onPress={() => router.push("/team")}>Conhecer devs</Button>
         </View>
       </View>
     </View>
-  );
+  )
 }

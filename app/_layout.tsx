@@ -1,61 +1,61 @@
-import { useEffect } from "react";
-import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-export { ErrorBoundary } from "expo-router";
+import { useEffect } from "react"
+import { Stack } from "expo-router"
+import { useFonts } from "expo-font"
+import * as SplashScreen from "expo-splash-screen"
+export { ErrorBoundary } from "expo-router"
 
-import * as SecureStore from "expo-secure-store";
-import { ClerkProvider } from "@clerk/clerk-expo";
+import * as SecureStore from "expo-secure-store"
+import { ClerkProvider } from "@clerk/clerk-expo"
 
 export const unstable_settings = {
   initialRouteName: "index",
-};
+}
 
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return SecureStore.getItemAsync(key);
+      return SecureStore.getItemAsync(key)
     } catch (err) {
-      return null;
+      return null
     }
   },
   async saveToken(key: string, value: string) {
     try {
-      return SecureStore.setItemAsync(key, value);
+      return SecureStore.setItemAsync(key, value)
     } catch (err) {
-      return;
+      return
     }
   },
-};
+}
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [fontsLoaded, fontsError] = useFonts({
     BrunoAce: require("../assets/fonts/BrunoAce-Regular.ttf"),
     Inter400: require("../assets/fonts/Inter-Regular.ttf"),
     Inter500: require("../assets/fonts/Inter-Medium.ttf"),
-  });
+  })
 
   useEffect(() => {
-    if (fontsError) throw fontsError;
-  }, [fontsError]);
+    if (fontsError) throw fontsError
+  }, [fontsError])
 
   useEffect(() => {
     if (fontsLoaded) {
-      SplashScreen.hideAsync();
+      SplashScreen.hideAsync()
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded])
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded) return null
 
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
       <RootLayoutNav />
     </ClerkProvider>
-  );
+  )
 }
 
 function RootLayoutNav() {
@@ -74,6 +74,10 @@ function RootLayoutNav() {
         name="congrats"
         options={{ headerShown: false, animation: "slide_from_right", contentStyle: { backgroundColor: "#000" } }}
       />
+      <Stack.Screen
+        name="team"
+        options={{ headerShown: false, animation: "fade", contentStyle: { backgroundColor: "#000" } }}
+      />
     </Stack>
-  );
+  )
 }

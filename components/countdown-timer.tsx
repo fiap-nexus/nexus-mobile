@@ -1,31 +1,32 @@
-import { useEffect, useMemo, useState } from "react";
-import { Text, View } from "react-native";
+import { useEffect, useMemo, useState } from "react"
+import { Text, View } from "react-native"
 
-import { CountdownNumberCard } from "./countdown-number-card";
-import { CountdownDots } from "./countdown-dots";
+import { CountdownNumberCard } from "./countdown-number-card"
+import { CountdownDots } from "./countdown-dots"
+
+const startDate = "2024-09-25T01:04:27-0300"
 
 export function CountdownTimer() {
-  const startDate = "2024-06-05T01:04:27-0300";
 
-  const targetTime = new Date(startDate).getTime();
-  const [currentTime, setCurrentTime] = useState(Date.now());
-  const timeBetween = useMemo(() => targetTime - currentTime, [currentTime, targetTime]);
+  const targetTime = new Date(startDate).getTime()
+  const [currentTime, setCurrentTime] = useState(Date.now())
+  const timeBetween = useMemo(() => targetTime - currentTime, [currentTime, targetTime])
 
-  const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((timeBetween % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeBetween % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeBetween % (1000 * 60)) / 1000);
+  const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((timeBetween % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((timeBetween % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((timeBetween % (1000 * 60)) / 1000)
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (timeBetween <= 0) {
-        clearInterval(interval);
+        clearInterval(interval)
       } else {
-        setCurrentTime(Date.now());
+        setCurrentTime(Date.now())
       }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timeBetween]);
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [timeBetween])
 
   return (
     <View className="items-center">
@@ -47,5 +48,5 @@ export function CountdownTimer() {
         <CountdownNumberCard number={seconds} suffix={"S"} />
       </View>
     </View>
-  );
+  )
 }

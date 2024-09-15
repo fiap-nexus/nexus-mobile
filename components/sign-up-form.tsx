@@ -1,24 +1,24 @@
-import { Alert, Text, View } from "react-native";
-import { router } from "expo-router";
-import { useSignUp } from "@clerk/clerk-expo";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Text, View } from "react-native"
+import { router } from "expo-router"
+import { useSignUp } from "@clerk/clerk-expo"
+import { Controller, useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-import { Input } from "./input";
-import { Button } from "./button";
+import { Input } from "./input"
+import { Button } from "./button"
 
 const userSchema = z.object({
   firstName: z.string().min(1, "Campo obrigatório"),
   lastName: z.string().min(1, "Campo obrigatório"),
   emailAddress: z.string().min(1, "Campo obrigatório").email("Endereço de email inválido."),
   password: z.string().min(8, "Senha deve possuir no mínimo 8 caracteres"),
-});
+})
 
-type UserSchema = z.infer<typeof userSchema>;
+type UserSchema = z.infer<typeof userSchema>
 
 export function SignUpForm() {
-  const { isLoaded, signUp } = useSignUp();
+  const { isLoaded, signUp } = useSignUp()
 
   const { control, handleSubmit } = useForm<UserSchema>({
     defaultValues: {
@@ -28,12 +28,12 @@ export function SignUpForm() {
       password: "",
     },
     resolver: zodResolver(userSchema),
-  });
+  })
 
   async function handleSignUp(data: UserSchema) {
-    if (!isLoaded) return;
+    if (!isLoaded) return
 
-    const { firstName, lastName, emailAddress, password } = data;
+    const { firstName, lastName, emailAddress, password } = data
 
     try {
       await signUp.create({
@@ -41,13 +41,13 @@ export function SignUpForm() {
         lastName,
         emailAddress,
         password,
-      });
+      })
 
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" })
 
-      router.push("/(auth)/confirm-email");
+      router.push("/(auth)/confirm-email")
     } catch (err: any) {
-      console.error("OAuth error: ", JSON.stringify(err));
+      console.error("OAuth error: ", JSON.stringify(err))
     }
   }
 
@@ -129,5 +129,5 @@ export function SignUpForm() {
 
       <Button onPress={handleSubmit(handleSignUp)}>Registrar</Button>
     </View>
-  );
+  )
 }

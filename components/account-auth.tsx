@@ -1,9 +1,9 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import { router } from "expo-router";
-import { useOAuth } from "@clerk/clerk-expo";
+import { Text, TouchableOpacity, View } from "react-native"
+import { router } from "expo-router"
+import { useOAuth } from "@clerk/clerk-expo"
 
-import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
-import { AntDesign } from "@expo/vector-icons";
+import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser"
+import { AntDesign } from "@expo/vector-icons"
 
 enum Strategy {
   Apple = "oauth_apple",
@@ -11,26 +11,26 @@ enum Strategy {
 }
 
 export function AccountAuth() {
-  useWarmUpBrowser();
+  useWarmUpBrowser()
 
-  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: "oauth_apple" });
-  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
+  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: "oauth_apple" })
+  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" })
 
   async function onSelectAuth(strategy: Strategy) {
     const selectedAuth = {
       [Strategy.Apple]: appleAuth,
       [Strategy.Google]: googleAuth,
-    }[strategy];
+    }[strategy]
 
     try {
-      const { createdSessionId, setActive } = await selectedAuth();
+      const { createdSessionId, setActive } = await selectedAuth()
 
       if (createdSessionId) {
-        setActive!({ session: createdSessionId });
-        router.push("/congrats");
+        setActive!({ session: createdSessionId })
+        router.push("/congrats")
       }
-    } catch (err) {
-      console.error("OAuth error: ", err);
+    } catch (err: any) {
+      if (err.errors[0].code === 'session_exists') router.push("/congrats")
     }
   }
 
@@ -57,5 +57,5 @@ export function AccountAuth() {
         <Text className="relative -top-0.5 text-center text-base text-white font-regular -tracking-tighter">Registrar com Google</Text>
       </TouchableOpacity>
     </View>
-  );
+  )
 }

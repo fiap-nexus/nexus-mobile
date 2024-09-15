@@ -29,6 +29,7 @@
     "expo-system-ui": "~2.9.4",
     "expo-web-browser": "~12.8.2",
     "nativewind": "^2.0.11",
+    "nexus": "file:",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.51.4",
