@@ -11,6 +11,7 @@ import { Button } from "./button"
 const userSchema = z.object({
   firstName: z.string().min(1, "Campo obrigatório"),
   lastName: z.string().min(1, "Campo obrigatório"),
+  username: z.string().min(1, "Campo obrigatório"),
   emailAddress: z.string().min(1, "Campo obrigatório").email("Endereço de email inválido."),
   password: z.string().min(8, "Senha deve possuir no mínimo 8 caracteres"),
 })
@@ -24,6 +25,7 @@ export function SignUpForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
+      username: "",
       emailAddress: "",
       password: "",
     },
@@ -33,12 +35,13 @@ export function SignUpForm() {
   async function handleSignUp(data: UserSchema) {
     if (!isLoaded) return
 
-    const { firstName, lastName, emailAddress, password } = data
+    const { firstName, lastName, username, emailAddress, password } = data
 
     try {
       await signUp.create({
         firstName,
         lastName,
+        username,
         emailAddress,
         password,
       })
@@ -89,6 +92,24 @@ export function SignUpForm() {
             )}
           />
         </View>
+      </View>
+
+      <View>
+        <Text className="text-base text-white font-regular mb-1">
+          Username
+          <Text className="text-primary"> *</Text>
+        </Text>
+
+        <Controller
+          control={control}
+          name={"username"}
+          render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+            <>
+              <Input value={value} onChangeText={onChange} onBlur={onBlur} placeholder="Username..." />
+              {error && <Text className="text-sm text-red-700 font-regular">{error.message}</Text>}
+            </>
+          )}
+        />
       </View>
 
       <View>

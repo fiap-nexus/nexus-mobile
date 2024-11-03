@@ -36,7 +36,7 @@ export function AccountAuth() {
 
   return (
     <View className="space-y-4 w-full">
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => onSelectAuth(Strategy.Apple)}
         className="relative justify-center items-center h-12 w-full border border-[#1C1C1C] rounded-xl"
       >
@@ -45,7 +45,7 @@ export function AccountAuth() {
         </View>
 
         <Text className="relative -top-0.5 text-center text-base text-white font-regular -tracking-tighter">Registrar com Apple</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         onPress={() => onSelectAuth(Strategy.Google)}

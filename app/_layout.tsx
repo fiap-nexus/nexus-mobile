@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import { Stack } from "expo-router"
+import { Stack, useRouter } from "expo-router"
 import { useFonts } from "expo-font"
 import * as SplashScreen from "expo-splash-screen"
 export { ErrorBoundary } from "expo-router"
 
 import * as SecureStore from "expo-secure-store"
-import { ClerkProvider } from "@clerk/clerk-expo"
+import { ClerkProvider, useAuth } from "@clerk/clerk-expo"
 
 export const unstable_settings = {
   initialRouteName: "index",
@@ -59,6 +59,15 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const router = useRouter()
+  const { isLoaded, isSignedIn } = useAuth();
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push("/congrats");
+    }
+  }, [isLoaded]);
+
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false, contentStyle: { backgroundColor: "#000" } }} />
@@ -77,6 +86,10 @@ function RootLayoutNav() {
       <Stack.Screen
         name="team"
         options={{ headerShown: false, animation: "fade", contentStyle: { backgroundColor: "#000" } }}
+      />
+      <Stack.Screen
+        name="account-config"
+        options={{ headerShown: false, animation: "slide_from_bottom", contentStyle: { backgroundColor: "#000" } }}
       />
     </Stack>
   )

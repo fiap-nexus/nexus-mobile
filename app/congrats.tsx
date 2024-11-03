@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import { router } from "expo-router"
 import { Image } from "expo-image"
 
@@ -21,8 +21,12 @@ export default function CongratsScreen() {
           <Text className="text-center text-base text-white font-regular mt-5">Te vejo no lançamento!</Text>
         </View>
 
-        <View className="items-center w-full mb-20 mt-5">
+        <View className="flex items-center w-full mb-20 mt-5 space-y-4">
           <Button onPress={() => router.push("/team")}>Conheça nossos devs</Button>
+
+          <TouchableOpacity activeOpacity={0.8} className="justify-center items-center w-full" onPress={() => router.push("/account-config")}>
+            <Text className="text-base text-white">Configurações de inscrição</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

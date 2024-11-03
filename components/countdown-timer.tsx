@@ -4,7 +4,7 @@ import { Text, View } from "react-native"
 import { CountdownNumberCard } from "./countdown-number-card"
 import { CountdownDots } from "./countdown-dots"
 
-const startDate = "2024-09-25T01:04:27-0300"
+const startDate = "2024-11-14T01:04:27-0300"
 
 export function CountdownTimer() {
 
