@@ -19,7 +19,7 @@
 ## 📚 Projeto
 
 <p>O objetivo deste projeto é desenvolver contador regressivo para o lançamento oficial da solução do desafio proposto pelo Challenge FIAP - 2024</p>
-<p>O aplicativo conta com o sistema de registro e validação de usuário sendo feito com o auxílio dos serviços do clerk.</p>
+<p>O aplicativo conta com o sistema de registro, validação e gerenciamento de usuário sendo feito com o auxílio dos serviços do clerk, além de gerar um username aleatório através da API Ninja.</p>
 
 <br/>
 
@@ -30,10 +30,12 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwindcss](https://tailwindcss.com/)
 - [Clerk](https://clerk.com)
+- [API-Ninja](https://api-ninjas.com)
 
 <br/>
 
 ## 🧾 Funcionalidades
 
-- [x] Coletar e validar os dados de registro do usuário.
+- [x] Coletar, validar e gerenciar dados de usuários.
+- [x] Geração de um username aleatório via API.
 - [x] Contador regressivo.
