@@ -7,11 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Input } from "./input"
 import { Button } from "./button"
+import axios from "axios"
 
 const userSchema = z.object({
   firstName: z.string().min(1, "Campo obrigatório"),
   lastName: z.string().min(1, "Campo obrigatório"),
-  username: z.string().min(1, "Campo obrigatório"),
   emailAddress: z.string().min(1, "Campo obrigatório").email("Endereço de email inválido."),
   password: z.string().min(8, "Senha deve possuir no mínimo 8 caracteres"),
 })
@@ -25,7 +25,6 @@ export function SignUpForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      username: "",
       emailAddress: "",
       password: "",
     },
@@ -35,7 +34,15 @@ export function SignUpForm() {
   async function handleSignUp(data: UserSchema) {
     if (!isLoaded) return
 
-    const { firstName, lastName, username, emailAddress, password } = data
+    const { firstName, lastName, emailAddress, password } = data
+
+    const random_word_api = await axios.get('https://api.api-ninjas.com/v1/randomword', {
+      headers: {
+        'X-api-key': 'E7uhXC1D9AnT5qkZ3WXzGWtziI1w45fo6GlNU8Vh'
+      }
+    })
+
+    const username = random_word_api.data.word[0]
 
     try {
       await signUp.create({
@@ -45,7 +52,6 @@ export function SignUpForm() {
         emailAddress,
         password,
       })
-
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" })
 
       router.push("/(auth)/confirm-email")
@@ -92,24 +98,6 @@ export function SignUpForm() {
             )}
           />
         </View>
-      </View>
-
-      <View>
-        <Text className="text-base text-white font-regular mb-1">
-          Username
-          <Text className="text-primary"> *</Text>
-        </Text>
-
-        <Controller
-          control={control}
-          name={"username"}
-          render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
-            <>
-              <Input value={value} onChangeText={onChange} onBlur={onBlur} placeholder="Username..." />
-              {error && <Text className="text-sm text-red-700 font-regular">{error.message}</Text>}
-            </>
-          )}
-        />
       </View>
 
       <View>
